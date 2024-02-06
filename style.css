@@ -49,6 +49,13 @@ main {
     max-width: 600px;
 }
 
+.tagline {
+    font-size: 20px; /* Adjust the font size as needed */
+    text-align: center; /* Center-align the tagline */
+    margin: 20px 0; /* Add some margin for spacing */
+    font-style: italic; /* Optional: Make it italic */
+}
+
 footer {
     margin-top: 20px;
     font-size: 0.8em;
