@@ -40,6 +40,15 @@ main {
     padding: 20px;
 }
 
+.restaurant {
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+}
+
 footer {
     margin-top: 20px;
     font-size: 0.8em;
