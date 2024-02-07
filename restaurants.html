@@ -33,65 +33,9 @@
         <p>Copyright © Chris Godek. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        // Fetch restaurant data from restaurants.json and initialize the map
-        function fetchRestaurants() {
-            fetch('restaurants.json')
-            .then(response => response.json())
-            .then(data => {
-                generateRestaurants(data);
-                initMap(data);
-            })
-            .catch(error => console.error('Error loading restaurant data:', error));
-        }
-        
-        function generateRestaurants(restaurants) {
-            const container = document.getElementById('restaurants-container');
-            restaurants.forEach(restaurant => {
-                const section = document.createElement('section');
-                section.className = 'restaurant';
-                section.innerHTML = `
-                    <h2><a href="${restaurant.homepage}" target="_blank">${restaurant.name}</a></h2>
-                    <p>Address: <a href="${restaurant.mapsLink}" target="_blank">${restaurant.address}</a></p>
-                    <p>Cuisine: ${restaurant.cuisine}</p>
-                `;
-                container.appendChild(section);
-            });
-        }
-        
-        function initMap(restaurants) {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
-                center: {lat: 37.7749, lng: -122.4194} // Center the map over San Francisco
-            });
-        
-            restaurants.forEach(function(restaurant) {
-                var marker = new google.maps.Marker({
-                    position: {lat: restaurant.lat, lng: restaurant.lng},
-                    map: map,
-                    title: restaurant.name
-                });
-        
-                marker.addListener('click', function() {
-                    window.open(restaurant.mapsLink, '_blank');
-                });
-            });           
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            document.addEventListener('DOMContentLoaded', function() {
-                fetch('restaurants.json')
-                .then(response => response.json())
-                .then(data => {
-                    generateRestaurants(data);
-                    initMap(data);
-                })
-                .catch(error => console.error('Error loading JSON:', error));
-        });
-        </script>
-        
+   
 
-<!--<script>
+<<script>
 // Restaurants Array
     function fetchRestaurants() {
         fetch('restaurants.json')
@@ -196,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 // Call generateRestaurantList at the end of your script
 generateRestaurantList();
-</script>-->
+</script>
 
 </body>
 </html>
