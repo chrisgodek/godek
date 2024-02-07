@@ -1,0 +1,39 @@
+[
+    {
+      "name": "Sichuan Homezzz",
+      "address": "5037 Geary Blvd, San Francisco, CA 94118",
+      "cuisine": "Sichuan Chinese",
+      "homepage": "https://guide.michelin.com/us/en/california/san-francisco/restaurant/sichuan-home",
+      "mapsLink": "https://maps.app.goo.gl/afaDGnneiykFeBqW6",
+      "lat": 37.78045138882303,
+      "lng": -122.47355322065978
+    },
+    {
+      "name": "Terra Cotta Warrior",
+      "address": "2555 Judah St, San Francisco, CA 94122",
+      "cuisine": "Shaanxi Chinese",
+      "homepage": "http://www.tcwus.com/",
+      "mapsLink": "https://maps.app.goo.gl/b2GtVYkYz5yTrTNE6",
+      "lat": 37.76113771859049,
+      "lng": -122.48955954514302
+    },
+    {
+      "name": "Chili House",
+      "address": "726 Clement St, San Francisco, CA 94118",
+      "cuisine": "Sichuan Chinese",
+      "homepage": "https://www.chilihousesf.com/",
+      "mapsLink": "https://maps.app.goo.gl/PyTvcPjSdGE8vFK26",
+      "lat": 37.7831701389477,
+      "lng": -122.46708531630661
+    },
+    {
+      "name": "Mr. Jiu's",
+      "address": "28 Waverly Pl, San Francisco, CA 94108",
+      "cuisine": "High end Chinese with a California Twist",
+      "homepage": "https://www.mrjius.com/",
+      "mapsLink": "https://maps.app.goo.gl/vowgGUnnwJL4oMx5A",
+      "lat": 37.793944713100245,
+      "lng": -122.4065485526578
+    }
+  ]
+  

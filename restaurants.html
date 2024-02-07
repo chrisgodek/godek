@@ -6,10 +6,10 @@
     <title>About | My Analysis World</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_x8Cd7bIVxyJNztYbwlYMEfRIcYqb_kE&callback=initMap"></script>
 </head>
-
 <body>
+
     <header>
         <h1>Restaurant Recommendations</h1>
         <nav>
@@ -22,30 +22,181 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <p class="tagline">just a list of restaurant recommendations</p>
-
-        <section class="restaurant">
-            <h2>Sichuan Home</h2>
-            <p>Address: 5037 Geary Blvd, San Francisco, CA 94118</p>
-            <p>Cuisine: Sichuan Chinese</p>
-        </section>
-
-        <section class="restaurant">
-            <h2>Terra Cotta Warrior</h2>
-            <p>Address: 2555 Judah St, San Francisco, CA 94122</p>
-            <p>Cuisine: Shaanxi Chinese</p>
-        </section>
-
-        <section class="restaurant">
-            <h2>Chili House</h2>
-            <p>Address: 726 Clement St, San Francisco, CA 94118</p>
-            <p>Cuisine: Sichuan Chinese</p>
-        </section>
-
+        <p class="tagline">just a list of restaurant recommendations and a map of their locations</p>
+        <div id="restaurants-container"></div>
+        <div id="map" style="height: 400px; width: 100%;"></div>
     </main>
+
     <footer>
         <p>Copyright © Chris Godek. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        // Fetch restaurant data from restaurants.json and initialize the map
+        function fetchRestaurants() {
+            fetch('restaurants.json')
+            .then(response => response.json())
+            .then(data => {
+                generateRestaurants(data);
+                initMap(data);
+            })
+            .catch(error => console.error('Error loading restaurant data:', error));
+        }
+        
+        function generateRestaurants(restaurants) {
+            const container = document.getElementById('restaurants-container');
+            restaurants.forEach(restaurant => {
+                const section = document.createElement('section');
+                section.className = 'restaurant';
+                section.innerHTML = `
+                    <h2><a href="${restaurant.homepage}" target="_blank">${restaurant.name}</a></h2>
+                    <p>Address: <a href="${restaurant.mapsLink}" target="_blank">${restaurant.address}</a></p>
+                    <p>Cuisine: ${restaurant.cuisine}</p>
+                `;
+                container.appendChild(section);
+            });
+        }
+        
+        function initMap(restaurants) {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: {lat: 37.7749, lng: -122.4194} // Center the map over San Francisco
+            });
+        
+            restaurants.forEach(function(restaurant) {
+                var marker = new google.maps.Marker({
+                    position: {lat: restaurant.lat, lng: restaurant.lng},
+                    map: map,
+                    title: restaurant.name
+                });
+        
+                marker.addListener('click', function() {
+                    window.open(restaurant.mapsLink, '_blank');
+                });
+            });           
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function() {
+                fetch('restaurants.json')
+                .then(response => response.json())
+                .then(data => {
+                    generateRestaurants(data);
+                    initMap(data);
+                })
+                .catch(error => console.error('Error loading JSON:', error));
+        });
+        </script>
+        
+
+<!--<script>
+// Restaurants Array
+    function fetchRestaurants() {
+        fetch('restaurants.json')
+        .then(response => response.json())
+        .then(data => {
+            generateRestaurants(data);
+            initMap(data);
+        })
+        .catch(error => console.error('Error loading restaurant data:', error));
+    }
+    const restaurants = [
+      {
+        name: "Sichuan Home",
+        address: "5037 Geary Blvd, San Francisco, CA 94118",
+        cuisine: "Sichuan Chinese",
+        homepage: "https://guide.michelin.com/us/en/california/san-francisco/restaurant/sichuan-home",
+        mapsLink: "https://maps.app.goo.gl/afaDGnneiykFeBqW6",
+        lat: 37.78045138882303, // 37.78045138882303, -122.47355322065978
+        lng: -122.47355322065978 // Example longitude, replace with actual
+      },
+      {
+        name: "Terra Cotta Warrior",
+        address: "2555 Judah St, San Francisco, CA 94122",
+        cuisine: "Shaanxi Chinese",
+        homepage: "http://www.tcwus.com/",
+        mapsLink: "https://maps.app.goo.gl/b2GtVYkYz5yTrTNE6",
+        lat: 37.76113771859049, 
+        lng: -122.48955954514302// 37.76113771859049, -122.48955954514302
+      },
+      {
+        name: "Chili House",
+        address: "726 Clement St, San Francisco, CA 94118",
+        cuisine: "Sichuan Chinese",
+        homepage: "https://www.chilihousesf.com/",
+        mapsLink: "https://maps.app.goo.gl/PyTvcPjSdGE8vFK26",
+        lat: 37.7831701389477,
+        lng: -122.46708531630661// 37.7831701389477, -122.46708531630661
+      },
+      {
+        name: "Mr. Jiu's",
+        address: "28 Waverly Pl, San Francisco, CA 94108",
+        cuisine: "High end Chinese with a California Twist",
+        homepage: "https://www.mrjius.com/",
+        mapsLink: "https://maps.app.goo.gl/vowgGUnnwJL4oMx5A",
+        lat: 37.793944713100245, // Replace with actual latitude
+        lng: -122.4065485526578 // 37.793944713100245, -122.4065485526578
+    }
+      // Add new restaurant objects here
+    ];
+    function generateRestaurants() {
+    const container = document.getElementById('restaurants-container');
+    restaurants.forEach(restaurant => {
+        const section = document.createElement('section');
+        section.className = 'restaurant';
+        section.innerHTML = `
+            <h2><a href="${restaurant.homepage}" target="_blank">${restaurant.name}</a></h2>
+            <p>Address: <a href="${restaurant.mapsLink}" target="_blank">${restaurant.address}</a></p>
+            <p>Cuisine: ${restaurant.cuisine}</p>
+        `;
+        container.appendChild(section);
+    });
+}
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: {lat: 37.7749, lng: -122.4194} // Center the map over San Francisco
+        });
+
+        restaurants.forEach(function(restaurant) {
+        var marker = new google.maps.Marker({
+            position: {lat: restaurant.lat, lng: restaurant.lng},
+            map: map,
+            title: restaurant.name
+        });
+
+        marker.addListener('click', function() {
+        window.open(restaurant.mapsLink, '_blank');
+        });
+    });           
+}
+    function generateRestaurantList() {
+        const listContainer = document.getElementById('restaurant-list');
+        // Sort the restaurants array alphabetically by the name property
+        restaurants.sort((a, b) => a.name.localeCompare(b.name));
+
+        restaurants.forEach(restaurant => {
+        const restaurantElement = `<div class="restaurant">
+            <h2><a href="${restaurant.homepage}" target="_blank">${restaurant.name}</a></h2>
+            <p>Address: <a href="${restaurant.mapsLink}" target="_blank">${restaurant.address}</a></p>
+            <p>Cuisine: ${restaurant.cuisine}</p>
+            </div>`;
+            listContainer.innerHTML += restaurantElement;
+        });
+    }
+// Ensure the DOM is fully loaded before executing
+
+document.addEventListener('DOMContentLoaded', function() {
+        generateRestaurants();
+        // Initialize the map after the DOM is loaded
+        initMap();
+    });
+    
+// Call generateRestaurantList at the end of your script
+generateRestaurantList();
+</script>-->
+
 </body>
 </html>
