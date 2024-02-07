@@ -56,6 +56,54 @@ main {
     font-style: italic; /* Optional: Make it italic */
 }
 
+.professional-summary {
+    margin-bottom: 20px; /* Adjust the value as needed */
+}
+.professional-experience {
+    margin-bottom: 20px; /* Adjust the value as needed */
+}
+.resume-content {
+    margin: 20px auto; /* Adds vertical margins of 20px and centers the block horizontally */
+    padding: 20px; /* Adds padding inside the block */
+    max-width: 800px; /* Sets a maximum width for the content block */
+    background-color: #f9f9f9; /* Optional: sets a background color */
+    border: 1px solid #ddd; /* Optional: adds a border */
+}
+.job-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.job-title {
+    font-weight: bold;
+}
+.job-dates {
+    font-weight: normal;
+}
+.job-section {
+    margin-top: 10px; /* Adjust the value as needed for your design */
+}
+.form-box {
+    border: 1px solid #ccc; /* Adds a border */
+    padding: 20px; /* Adds padding inside the box */
+    margin: 20px 0; /* Adds margin for spacing outside the box */
+    border-radius: 5px; /* Optional: Rounds the corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Adds a subtle shadow */
+    max-width: 500px; /* Sets a maximum width */
+    margin-left: auto; /* Centers the box horizontally */
+    margin-right: auto;
+    background-color: #f9f9f9; /* Sets a background color */
+} /* Contact form box */
+#message {
+    width: 100%; /* Makes the textarea fill the container width */
+    height: 150px; /* Adjust the height as needed */
+}
+#name {
+    width: 100%;
+}
+#email {
+    width: 100%;
+}
 footer {
     margin-top: 20px;
     font-size: 0.8em;

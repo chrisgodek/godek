@@ -11,19 +11,20 @@
 <body>
 
     <header>
-        <h1>Restaurant Recommendations</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="blog.html">Blog</a></li>
+                <li><a href="restaurants.html">Restaurants</a></li> 
                 <li><a href="about.html">About</a></li>
+                <li><a href="resume.html">Resume</a></li>           
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="restaurants.html">Restaurants</a></li>            
             </ul>
         </nav>
     </header>
 
     <main>
+        <h1>Restaurant Recommendations</h1>
         <p class="tagline">just a list of restaurant recommendations and a map of their locations</p>
         <div id="restaurants-container"></div>
         <div id="map" style="height: 400px; width: 100%;"></div>
@@ -32,8 +33,6 @@
     <footer>
         <p>Copyright © Chris Godek. All Rights Reserved.</p>
     </footer>
-
-   
 
 <<script>
 // Restaurants Array
@@ -46,6 +45,42 @@
         })
         .catch(error => console.error('Error loading restaurant data:', error));
     }
+    function generateRestaurants() {
+        const container = document.getElementById('restaurants-container');
+        restaurants.forEach(restaurant => {
+            const section = document.createElement('section');
+            section.className = 'restaurant';
+            section.innerHTML = `
+                <h2><a href="${restaurant.homepage}" target="_blank">${restaurant.name}</a></h2>
+                <p>Address: <a href="${restaurant.mapsLink}" target="_blank">${restaurant.address}</a></p>
+                <p>Cuisine: ${restaurant.cuisine}</p>
+            `;
+            container.appendChild(section);
+        });
+    }
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: {lat: 37.7749, lng: -122.4194} // Center the map over San Francisco
+        });
+
+        restaurants.forEach(function(restaurant) {
+            var marker = new google.maps.Marker({
+                position: {lat: restaurant.lat, lng: restaurant.lng},
+                map: map,
+                title: restaurant.name
+            });
+
+            marker.addListener('click', function() {
+                window.open(restaurant.mapsLink, '_blank');
+            });              
+        });           
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+    generateRestaurants();
+    // Initialize the map after the DOM is loaded
+    initMap();
+});
     const restaurants = [
       {
         name: "Sichuan Home",
@@ -85,37 +120,9 @@
     }
       // Add new restaurant objects here
     ];
-    function generateRestaurants() {
-    const container = document.getElementById('restaurants-container');
-    restaurants.forEach(restaurant => {
-        const section = document.createElement('section');
-        section.className = 'restaurant';
-        section.innerHTML = `
-            <h2><a href="${restaurant.homepage}" target="_blank">${restaurant.name}</a></h2>
-            <p>Address: <a href="${restaurant.mapsLink}" target="_blank">${restaurant.address}</a></p>
-            <p>Cuisine: ${restaurant.cuisine}</p>
-        `;
-        container.appendChild(section);
-    });
-}
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: {lat: 37.7749, lng: -122.4194} // Center the map over San Francisco
-        });
+    
 
-        restaurants.forEach(function(restaurant) {
-        var marker = new google.maps.Marker({
-            position: {lat: restaurant.lat, lng: restaurant.lng},
-            map: map,
-            title: restaurant.name
-        });
-
-        marker.addListener('click', function() {
-        window.open(restaurant.mapsLink, '_blank');
-        });
-    });           
-}
+ 
     function generateRestaurantList() {
         const listContainer = document.getElementById('restaurant-list');
         // Sort the restaurants array alphabetically by the name property
@@ -132,11 +139,7 @@
     }
 // Ensure the DOM is fully loaded before executing
 
-document.addEventListener('DOMContentLoaded', function() {
-        generateRestaurants();
-        // Initialize the map after the DOM is loaded
-        initMap();
-    });
+
     
 // Call generateRestaurantList at the end of your script
 generateRestaurantList();
